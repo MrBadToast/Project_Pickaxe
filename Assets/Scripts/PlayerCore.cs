@@ -91,9 +91,9 @@ public class PlayerCore : MonoBehaviour {
     void FixedUpdate()
     {
         if (transform.rotation.eulerAngles.y == 0)
-            headingTo = Vector2.left;
-        if (transform.rotation.eulerAngles.y == 180)
             headingTo = Vector2.right;
+        if (transform.rotation.eulerAngles.y == 180)
+            headingTo = Vector2.left;
 
         #region 레이캐스트 관리
 

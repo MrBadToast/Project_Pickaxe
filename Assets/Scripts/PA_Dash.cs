@@ -35,8 +35,19 @@ public class PA_Dash : MonoBehaviour
 
     IEnumerator Dash()
     {
+        if (Input.GetKey(player.rightmove))
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            player.headingTo = Vector2.right;
+        }
+        if (Input.GetKey(player.leftmove))
+        {
+            transform.rotation = Quaternion.Euler(0, 180f, 0);
+            player.headingTo = Vector2.left;
+        }
+
         player.RBody.velocity = Vector2.zero;
-        player.RBody.velocity += new Vector2(-player.headingTo.x, 0f) * DashSpeed;
+        player.RBody.velocity += new Vector2(player.headingTo.x, 0f) * DashSpeed;
         Dashing = true;
         player.AllowControl = false;
         yield return new WaitForSeconds(DashTime);

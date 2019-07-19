@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 [RequireComponent(typeof(PlayerCore))]
 public class PA_Attack : MonoBehaviour
 {
-    [Space]
+    public Vector2 KnockBackForce = new Vector2(1.0f, 1.0f);
     public float AttackTime = 0.1f;
     public float AttackStandbyTime = 0.3f;
     public float MidairAttackVelocity = 10f;
@@ -76,8 +76,6 @@ public class PA_Attack : MonoBehaviour
 
         if (player.AllowControl)
         {
-            //========================================
-
             if (AttackTimer > AttackStandbyTime)
             {
                 AttackedNumber = 0;

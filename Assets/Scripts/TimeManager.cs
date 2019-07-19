@@ -25,7 +25,7 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
     }
 
-    public void SetTimeScale(float slowFactor)
+    public void SetTimeScale(float slowFactor = 1.0f)
     {
         Time.timeScale = slowFactor;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
