@@ -19,6 +19,7 @@ public class PA_Attack : MonoBehaviour
     [Title("자식 오브젝트")]
     public Transform AttackEffectOrigin;
     public GameObject AttackHitbox;
+    public GameObject AirAttackHitbox;
     public GameObject AirAttackObj;
 
     [FoldoutGroup("애니메이션 스테이트")]
@@ -39,6 +40,7 @@ public class PA_Attack : MonoBehaviour
 
     private int AttackedNumber = 0;
     private float AttackTimer = 0;                  // 공격키를 누르지 않았을 때 증가하는 값입니다.
+    private bool AirAttacked = false;
 
     void Awake()
     {
@@ -64,6 +66,7 @@ public class PA_Attack : MonoBehaviour
                 StopWallHang();
                 player.transform.rotation *= Quaternion.Euler(0, 180, 0);
                 player.headingTo = -player.headingTo;
+                player.RBody.velocity += player.headingTo * 5f;
             }
 
             if (Input.GetKeyDown(player.dash))
@@ -88,7 +91,7 @@ public class PA_Attack : MonoBehaviour
                     StartCoroutine("Normal_Attack");
                 else if (!player.GroundDetact && player.ForwardDetact)
                     WallHang();
-                else if (!player.GroundDetact && !player.AirJumped)
+                else if (!player.GroundDetact)
                     StartCoroutine("MidairAttack");
 
                 AttackTimer = 0;
@@ -97,9 +100,12 @@ public class PA_Attack : MonoBehaviour
             else
                 AttackTimer += Time.deltaTime;
 
-            player.anim.SetFloat(AniPar_AttackTimer, AttackTimer);
+            player.anim.SetFloat(AniPar_AttackTimer, AttackTimer);          
+        }
 
-            
+        if(player.GroundDetact == true)
+        {
+            AirAttacked = false;
         }
     }
 
@@ -151,14 +157,17 @@ public class PA_Attack : MonoBehaviour
 
     private IEnumerator MidairAttack()
     {
+        if(!AirAttacked)
         player.RBody.velocity = new Vector2(player.RBody.velocity.x, MidairAttackVelocity);
 
         AirAttackObj.SetActive(true);
         AirAttackObj.GetComponent<Animator>().Play("AirAttack");
-        player.AirJumped = true;
+        AirAttackHitbox.SetActive(true);
+        AirAttacked = true;
 
         yield return new WaitForSeconds(0.5f);
         AirAttackObj.SetActive(false);
+        AirAttackHitbox.SetActive(false);
     }
 
     public void CancelAttack()

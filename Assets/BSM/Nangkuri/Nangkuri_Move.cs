@@ -22,8 +22,6 @@ public class Nangkuri_Move : StateMachineBehaviour
 
         if (nangkuriBase.detactChangeDir)
             nangkuriBase.SwitchDirection();
-        else if (nangkuriBase.detactForward)
-            nangkuriBase.SwitchDirection();
 
         if (Mathf.Abs(rBody.velocity.x) < nangkuriBase.WalkSpeed)
             rBody.velocity += new Vector2(nangkuriBase.MoveAcc * nangkuriBase.headingTo.x, 0.0f);
