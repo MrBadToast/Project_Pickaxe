@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public class HUD : MonoBehaviour
 {
-    public static TimeManager Instance = null;
+    static public HUD Instance = null;
+
+    public HUD_HpBlockManager hpManager;
 
     private void Start()
     {
@@ -17,13 +19,9 @@ public class TimeManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         #endregion
     }
-    void Update()
-    {
-    }
 
-    public void SetTimeScale(float slowFactor = 1.0f)
+    public void OnHurt(int Health)
     {
-        Time.timeScale = slowFactor;
-        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        hpManager.SetHealth(Health);
     }
 }
