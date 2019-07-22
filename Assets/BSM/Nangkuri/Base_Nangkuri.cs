@@ -50,6 +50,7 @@ public class Base_Nangkuri : Enemy
 
     void Update()
     {
+
         Debug.DrawLine(RCO_Foot.position, new Vector2(RCO_Foot.position.x, RCO_Foot.position.y - RCDistance_Foot));
         Debug.DrawLine(RCO_FrontFoot.position, new Vector2(RCO_FrontFoot.position.x, RCO_FrontFoot.position.y - RCDistance_Foot));
         Debug.DrawLine(RCO_Forward.position, new Vector2(RCO_Forward.position.x + headingTo.x * RCDistance_Forward, RCO_Forward.position.y));

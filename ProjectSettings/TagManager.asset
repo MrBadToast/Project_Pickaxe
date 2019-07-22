@@ -3,8 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - vcam
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -20,7 +19,7 @@ TagManager:
   - Player
   - EnemyHurt
   - PlayerHurt
-  - Background
+  - 
   - 
   - 
   - 

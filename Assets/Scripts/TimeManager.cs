@@ -6,6 +6,8 @@ public class TimeManager : MonoBehaviour
 {
     public static TimeManager Instance = null;
 
+    public float SlowDownLength = 2f;
+
     private void Start()
     {
         #region singleton
@@ -19,6 +21,8 @@ public class TimeManager : MonoBehaviour
     }
     void Update()
     {
+        Time.timeScale += (1f / SlowDownLength) * Time.unscaledDeltaTime;
+        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
     }
 
     public void SetTimeScale(float slowFactor = 1.0f)

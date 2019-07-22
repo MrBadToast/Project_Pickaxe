@@ -77,7 +77,7 @@ public class PA_Attack : MonoBehaviour
             }
         }
 
-        if (player.ControlAllowed)
+        if (player.AllowControl)
         {
             if (AttackTimer > AttackStandbyTime)
             {
@@ -111,7 +111,7 @@ public class PA_Attack : MonoBehaviour
 
     IEnumerator Normal_Attack()
     {
-        player.ControlAllowed = false;
+        player.AllowControl = false;
         Vector3 Target = player.GetMouseWorldpos();
 
         if (Target.x > transform.position.x)
@@ -141,6 +141,7 @@ public class PA_Attack : MonoBehaviour
 
                 AttackedNumber = 0;
                 player.anim.Play(AniState_NormalAttack3);
+                yield return new WaitForSeconds(AttackTime * 3);
                 AttackHitbox.SetActive(true);
                 Instantiate(AttackEffect, AttackEffectOrigin.position, transform.rotation);
                 break;
@@ -149,7 +150,7 @@ public class PA_Attack : MonoBehaviour
 
         yield return new WaitForSeconds(AttackTime);
         AttackHitbox.SetActive(false);
-        player.ControlAllowed = true;
+        player.AllowControl = true;
         yield return null;
 
     }
@@ -174,7 +175,7 @@ public class PA_Attack : MonoBehaviour
         StopCoroutine("Normal_Attack");
         StopCoroutine("MidairAttack");
         AttackHitbox.SetActive(false);
-        player.ControlAllowed = true;
+        player.AllowControl = true;
     }
 
     private void WallHang()
