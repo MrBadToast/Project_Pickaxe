@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae0b45f83f9fbe4d97eb2a81fe99fa8, type: 3}
+  m_Name: Ground_Florals
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: -24709583952451862, guid: 000ec72ea30a48a4cabe2b844f4a9eca,
+    type: 3}
+  m_DefaultGameObject: {fileID: 5779979896566486306, guid: 6058e2b26e1a67349855c2044bd23548,
+    type: 3}
+  m_DefaultColliderType: 2
+  m_TilingRules:
+  - m_Neighbors: 0000000000000000000000000000000000000000000000000000000000000000
+    m_Sprites:
+    - {fileID: 3266441051673285206, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -4665498927245123715, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: 394528835271930129, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -5449278504480454416, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: 5920973347486098096, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -2994111223396985280, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -24709583952451862, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -4912249657131394049, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: 595177681236655047, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    m_GameObject: {fileID: 5779979896566486306, guid: 6058e2b26e1a67349855c2044bd23548,
+      type: 3}
+    m_AnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_RuleTransform: 0
+    m_Output: 1
+    m_ColliderType: 2
+    m_RandomTransform: 0
