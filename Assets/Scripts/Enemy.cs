@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
             Health = 0;
             Dead();
         }
-        
     }
 
     public virtual void Dead() { }

@@ -2,11 +2,22 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+using Cinemachine;
+
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerCore : MonoBehaviour {
 
     #region 변수
+
+    [Title("기본속성")]
+    public int MaxHealth;
+    public int MaxEnergy;
+    [HideInInspector]
+    public int CurrentHealth;
+    [HideInInspector]
+    public int CurrentEnergy;
+
     [Title("키 세팅")]
     public KeyCode leftmove;
     public KeyCode rightmove;
@@ -30,11 +41,13 @@ public class PlayerCore : MonoBehaviour {
     public float GroundRCDistance;              // 땅과 얼마나 가까이 있을때 땅 위에 딛는 판정을 할지 결정합니다.
     public float ForwardRCDistance;              
     public float StepInterval = 1f;             // 캐릭터가 발을 땅에 딛는 주기입니다.
+    public float HurtCooldown = 2.0f;
+    public float HurtDuration = 0.5f;
+    public float DamagedForce = 5.0f;
 
     [Title("원점")]
     public Transform RCO_Foot;
     public Transform RCO_Forward;
-
 
     [FoldoutGroup("애니메이션 파라미터")]
     public string AniPar_MoveKey;
@@ -50,7 +63,7 @@ public class PlayerCore : MonoBehaviour {
 
 
     [HideInInspector]
-    public bool AllowControl = true;
+    public bool ControlAllowed = true;
     [HideInInspector]
     public Vector2 headingTo;
     [HideInInspector]
@@ -74,8 +87,9 @@ public class PlayerCore : MonoBehaviour {
     [HideInInspector]
     public bool AirJumped = false;
 
-    private float AirTimer = 0;                     // 캐릭터가 공중에 있을때 증가하는 값입니다.
-    private float StepTimer = 0;                    // 캐릭터가 걸을때 시간측정을 위한 값입니다.
+    private float AirTimer = 0f;                     // 캐릭터가 공중에 있을때 증가하는 값입니다.
+    private float StepTimer = 0f;                    // 캐릭터가 걸을때 시간측정을 위한 값입니다.
+    private float HurtTimer = 5f;
 
     #endregion
 
@@ -86,6 +100,8 @@ public class PlayerCore : MonoBehaviour {
         a_Attack = GetComponent<PA_Attack>();
         a_PickaxeThrow = GetComponent<PA_PickaxeThrow>();
         a_Dash = GetComponent<PA_Dash>();
+
+        CurrentHealth = MaxHealth;
     }
 
     void FixedUpdate()
@@ -114,7 +130,7 @@ public class PlayerCore : MonoBehaviour {
 
         #region 컨트롤
 
-        if (AllowControl)
+        if (ControlAllowed)
         {
             if (!WallHanged)
             {
@@ -158,12 +174,10 @@ public class PlayerCore : MonoBehaviour {
         // ========================= 기타 컨트롤 보정 ===================================
 
 
-        if ( !AllowControl || !(Input.GetKey(leftmove) || Input.GetKey(rightmove)))
+        if ( !ControlAllowed || !(Input.GetKey(leftmove) || Input.GetKey(rightmove)))
         {
-            if (GroundDetact)
+            if(GroundDetact)
             RBody.velocity = Vector2.Lerp(RBody.velocity, new Vector2(0, RBody.velocity.y), 0.25f);
-            else
-            RBody.velocity = Vector2.Lerp(RBody.velocity, new Vector2(0, RBody.velocity.y), 0.1f);
         }
 
         LimitVerticalSpeed(-Vrt_MaxSpeed, Vrt_MaxSpeed);
@@ -188,9 +202,12 @@ public class PlayerCore : MonoBehaviour {
         }
 
         //애니메이션 관리
-        anim.SetBool(AniPar_MoveKey, AllowControl && (Input.GetKey(rightmove) || Input.GetKey(leftmove)));
+        anim.SetBool(AniPar_MoveKey, ControlAllowed && (Input.GetKey(rightmove) || Input.GetKey(leftmove)));
         anim.SetBool(AniPar_OnGround, GroundDetact);
         anim.SetFloat(AniPar_VrtSpeed, RBody.velocity.y);
+
+        HurtTimer += Time.deltaTime;
+
     }
 
     //========================================================================================
@@ -235,6 +252,18 @@ public class PlayerCore : MonoBehaviour {
         a_PickaxeThrow.CancelThrow();
     }
 
+    public void Hurt(int Damage,Vector2 hurtOrigin)
+    {
+        StartCoroutine(Cor_Hurt(Damage, hurtOrigin));
+    }
+
+    public void Dead()
+    {
+        TimeManager.Instance.SetTimeScale(0.2f);
+        RBody.velocity = new Vector2(-headingTo.x, 1f).normalized * DamagedForce * 2;
+        GameObject.FindGameObjectWithTag("vcam").GetComponent<CinemachineFramingTransposer>().m_CameraDistance = 5f;
+    }
+
     //========================================================================================
 
     private void LimitVerticalSpeed(float min, float MAX)
@@ -255,7 +284,29 @@ public class PlayerCore : MonoBehaviour {
         Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, transform.position.z));
         xy.Raycast(ray, out d);
         return ray.GetPoint(d);
-
     }
 
+    //=========================================================================================
+    private IEnumerator Cor_Hurt(int Damage, Vector3 hurtOrigin)
+    {
+        if (HurtTimer >= HurtCooldown)
+        {
+            CurrentHealth -= Damage;
+
+            HUD.Instance.OnHurt(CurrentHealth);
+            RBody.velocity = Vector2.zero;
+            RBody.velocity = new Vector2(-headingTo.x, 1f).normalized * DamagedForce;
+            HurtTimer = 0;
+            ControlAllowed = false;
+
+            if (CurrentHealth <= 0)
+            {
+                Dead();
+                yield break;
+            }
+
+            yield return new WaitForSeconds(HurtDuration);
+            ControlAllowed = true;      
+        }
+    }
 }

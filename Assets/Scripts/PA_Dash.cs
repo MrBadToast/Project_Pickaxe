@@ -22,15 +22,18 @@ public class PA_Dash : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(player.dash)&&!Dashing)
+        if (player.ControlAllowed)
         {
-            player.CancelAllActions();
-            Instantiate(DashEffect, transform.position, transform.rotation);
-            StartCoroutine(Dash());
-        }
+            if (Input.GetKeyDown(player.dash) && !Dashing)
+            {
+                player.CancelAllActions();
+                Instantiate(DashEffect, transform.position, transform.rotation);
+                StartCoroutine(Dash());
+            }
 
-        if (Dashing)
-            Instantiate(AfterImage, transform.position, transform.rotation);
+            if (Dashing)
+                Instantiate(AfterImage, transform.position, transform.rotation);
+        }
     }
 
     IEnumerator Dash()
@@ -49,9 +52,9 @@ public class PA_Dash : MonoBehaviour
         player.RBody.velocity = Vector2.zero;
         player.RBody.velocity += new Vector2(player.headingTo.x, 0f) * DashSpeed;
         Dashing = true;
-        player.AllowControl = false;
+        player.ControlAllowed = false;
         yield return new WaitForSeconds(DashTime);
-        player.AllowControl = true;
+        player.ControlAllowed = true;
         Dashing = false;
         player.RBody.velocity = Vector2.zero;
 
