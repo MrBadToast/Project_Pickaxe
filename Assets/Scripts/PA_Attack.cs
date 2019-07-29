@@ -34,7 +34,7 @@ public class PA_Attack : MonoBehaviour
     [FoldoutGroup("애니메이션 파라미터")]
     public string AniPar_AttackTimer;
     [FoldoutGroup("애니메이션 파라미터")]
-    public string AniPar_WallHangEnd;
+    public string AniPar_WallHangExit;
 
     private PlayerCore player;
 
@@ -179,7 +179,7 @@ public class PA_Attack : MonoBehaviour
 
     private void WallHang()
     {
-
+        player.anim.Play(AniState_WallHang);
         player.WallHanged = true;
         player.AirJumped = false;
         player.RBody.constraints = RigidbodyConstraints2D.FreezePosition;
@@ -188,6 +188,7 @@ public class PA_Attack : MonoBehaviour
 
     private void StopWallHang()
     {
+        player.anim.SetTrigger(AniPar_WallHangExit);
         player.RBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         player.WallHanged = false;
     }

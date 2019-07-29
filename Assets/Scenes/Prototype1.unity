@@ -96,7 +96,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 0da0066e9f119444296b1122c999b0ca,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -5245,7 +5246,7 @@ Tilemap:
   - m_RefCount: 47
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
   m_Origin: {x: -31, y: -3, z: 0}
   m_Size: {x: 68, y: 3, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -14096,7 +14097,7 @@ Tilemap:
   - m_RefCount: 926
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
   m_Origin: {x: -31, y: -8, z: 0}
   m_Size: {x: 68, y: 30, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -33972,7 +33973,7 @@ Tilemap:
   - m_RefCount: 2135
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
   m_Origin: {x: -54, y: -18, z: 0}
   m_Size: {x: 103, y: 48, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -34967,7 +34968,7 @@ Tilemap:
   - m_RefCount: 87
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
   m_Origin: {x: -53, y: -23, z: 0}
   m_Size: {x: 109, y: 47, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -41134,7 +41135,7 @@ Tilemap:
   - m_RefCount: 646
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
   m_Origin: {x: -23, y: -14, z: 0}
   m_Size: {x: 68, y: 16, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -47455,7 +47456,7 @@ Tilemap:
   - m_RefCount: 674
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
   m_Origin: {x: -23, y: -14, z: 0}
   m_Size: {x: 68, y: 15, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}

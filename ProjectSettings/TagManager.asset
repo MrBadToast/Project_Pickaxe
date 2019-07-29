@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - vcam
+  - StartPoint
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - EnemyHurt
   - PlayerHurt
   - Background
-  - 
+  - CameraCollider
   - 
   - 
   - 
@@ -39,12 +40,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BaseBackground
+    uniqueID: 3360002137
+    locked: 0
+  - name: Background3
+    uniqueID: 1388876761
+    locked: 0
+  - name: Background2
+    uniqueID: 1171629015
+    locked: 0
+  - name: Background1
+    uniqueID: 4214106617
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Character
     uniqueID: 397509391
-    locked: 0
-  - name: Background
-    uniqueID: 1388876761
     locked: 0
