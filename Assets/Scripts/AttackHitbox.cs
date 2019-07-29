@@ -8,12 +8,9 @@ public class AttackHitbox : MonoBehaviour
     public Vector2 KnockBackPower;
     public LayerMask Target;
 
-    private BoxCollider2D boxcol;
-
     Vector2 headingTo;
     void Awake()
     {
-        boxcol = GetComponent<BoxCollider2D>();
     }
 
     void OnEnable()
@@ -23,7 +20,15 @@ public class AttackHitbox : MonoBehaviour
         else if (transform.rotation == Quaternion.Euler(0f, 180f, 0f))
             headingTo = Vector2.left;
 
-        Collider2D[] cols = Physics2D.OverlapBoxAll(transform.position + new Vector3(boxcol.offset.x * headingTo.x, boxcol.offset.y), boxcol.size, 0f, Target);
+        Collider2D[] cols = null;
+
+        if (TryGetComponent(out BoxCollider2D boxcol))
+            cols = Physics2D.OverlapBoxAll(transform.position + new Vector3(boxcol.offset.x * headingTo.x, boxcol.offset.y), boxcol.size, 0f, Target);
+
+        if (TryGetComponent(out CircleCollider2D cirlecol))
+            cols = Physics2D.OverlapCircleAll(transform.position + new Vector3(cirlecol.offset.x * headingTo.x, cirlecol.offset.y), cirlecol.radius, Target);
+
+
 
         foreach (Collider2D col in cols)
         {

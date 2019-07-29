@@ -10,6 +10,7 @@ public class PA_Attack : MonoBehaviour
     public float AttackTime = 0.1f;
     public float AttackStandbyTime = 0.3f;
     public float MidairAttackVelocity = 10f;
+    public float MidairAttackCooldown = 0.5f;
 
 
     [Title("프리팹")]
@@ -41,6 +42,7 @@ public class PA_Attack : MonoBehaviour
     private int AttackedNumber = 0;
     private float AttackTimer = 0;                  // 공격키를 누르지 않았을 때 증가하는 값입니다.
     private bool AirAttacked = false;
+    private float AirAttackTimer = 0;
 
     void Awake()
     {
@@ -83,6 +85,8 @@ public class PA_Attack : MonoBehaviour
             {
                 AttackedNumber = 0;
             }
+            else
+                AttackTimer += Time.deltaTime;
 
             if (Input.GetKeyDown(player.attack) && !player.WallHanged)
             {
@@ -91,16 +95,18 @@ public class PA_Attack : MonoBehaviour
                     StartCoroutine("Normal_Attack");
                 else if (!player.GroundDetact && player.ForwardDetact)
                     WallHang();
-                else if (!player.GroundDetact)
+                else if (!player.GroundDetact && AirAttackTimer > MidairAttackCooldown)
+                {
                     StartCoroutine("MidairAttack");
+                    AirAttackTimer = 0f;
+                }
 
                 AttackTimer = 0;
             }
 
-            else
-                AttackTimer += Time.deltaTime;
 
-            player.anim.SetFloat(AniPar_AttackTimer, AttackTimer);          
+            AirAttackTimer += Time.deltaTime;
+            player.anim.SetFloat(AniPar_AttackTimer, AttackTimer);
         }
 
         if(player.GroundDetact == true)
@@ -156,9 +162,12 @@ public class PA_Attack : MonoBehaviour
 
     private IEnumerator MidairAttack()
     {
-        if(!AirAttacked)
-        player.RBody.velocity = new Vector2(player.RBody.velocity.x, MidairAttackVelocity);
+        if (!AirAttacked)
+            player.RBody.velocity = new Vector2(player.RBody.velocity.x, MidairAttackVelocity);
+        else
+            player.RBody.velocity = new Vector2(player.RBody.velocity.x, 0f);
 
+        AirAttackObj.SetActive(false);
         AirAttackObj.SetActive(true);
         AirAttackObj.GetComponent<Animator>().Play("AirAttack");
         AirAttackHitbox.SetActive(true);
