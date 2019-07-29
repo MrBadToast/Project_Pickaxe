@@ -51,12 +51,15 @@ public class PA_Dash : MonoBehaviour
 
         player.RBody.velocity = Vector2.zero;
         player.RBody.velocity += new Vector2(player.headingTo.x, 0f) * DashSpeed;
+        float PrevGravity = player.RBody.gravityScale;
+        player.RBody.gravityScale = 0f;
         Dashing = true;
-        player.ControlAllowed = false;
+        player.ActionOccupied = true;
+
         yield return new WaitForSeconds(DashTime);
-        player.ControlAllowed = true;
+        player.RBody.gravityScale = PrevGravity;
+        player.ActionOccupied = false;
         Dashing = false;
-        player.RBody.velocity = Vector2.zero;
 
         yield return null;
     }

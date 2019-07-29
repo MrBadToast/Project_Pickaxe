@@ -28,8 +28,9 @@ public class PlayerCore : MonoBehaviour {
     public KeyCode dash;
 
     [Title("물리속성")]
-    public float Hor_Acceleration = 0.5f;
-    public float Hor_MaxSpeed = 5f;
+    public float Hor_Speed = 5f;
+    [Range(0,1)]
+    public float Hor_Smooth = 0.5f;
     public float JumpVelocity = 6f;
     public float AirJumpVelocity = 6f;
     public float JumpDuration = 0.25f;
@@ -64,6 +65,8 @@ public class PlayerCore : MonoBehaviour {
 
     [HideInInspector]
     public bool ControlAllowed = true;
+    [HideInInspector]
+    public bool ActionOccupied = false;
     [HideInInspector]
     public Vector2 headingTo;
     [HideInInspector]
@@ -114,11 +117,9 @@ public class PlayerCore : MonoBehaviour {
         #region 레이캐스트 관리
 
         GroundDetact = Physics2D.Raycast(RCO_Foot.position, Vector2.down, GroundRCDistance, TerrainLayer);
-
         Debug.DrawLine(RCO_Foot.position, RCO_Foot.position + new Vector3(0, -GroundRCDistance, 0), Color.magenta);
 
         ForwardDetact = Physics2D.Raycast(RCO_Forward.position, headingTo, ForwardRCDistance, TerrainLayer);
-
         Debug.DrawLine(RCO_Forward.position, RCO_Forward.position + new Vector3(ForwardRCDistance,0, 0), Color.cyan);
 
         if (!GroundDetact)
@@ -128,64 +129,53 @@ public class PlayerCore : MonoBehaviour {
 
         #endregion
 
-        #region 컨트롤
 
-        if (ControlAllowed)
+        float targetVelocity = 0;
+
+
+        if (!WallHanged && !ActionOccupied && ControlAllowed)
         {
-            if (!WallHanged)
+            if (Input.GetKey(rightmove))
             {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
 
-                if (Input.GetKey(rightmove))
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                targetVelocity = Hor_Speed;
 
-                    if (RBody.velocity.x < 0)
-                        RBody.velocity = new Vector2(0, RBody.velocity.y);
+                if (GroundDetact && StepTimer > StepInterval)
+                    Step();
+                else
+                    StepTimer += Time.deltaTime;
+            }
 
-                    if (RBody.velocity.x < Hor_MaxSpeed)
-                        RBody.velocity += new Vector2(Hor_Acceleration, 0);
+            else if (Input.GetKey(leftmove))
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
 
-                    if (GroundDetact && StepTimer > StepInterval)
-                        Step();
-                    else
-                        StepTimer += Time.deltaTime;
-                }
+                targetVelocity = -Hor_Speed;
 
-                else if (Input.GetKey(leftmove))
-                {
-                    transform.rotation = Quaternion.Euler(0, 180, 0);
-
-                    if (RBody.velocity.x > 0)
-                        RBody.velocity = new Vector2(0, RBody.velocity.y);
-
-                    if (RBody.velocity.x > -Hor_MaxSpeed)
-                        RBody.velocity += new Vector2(-Hor_Acceleration, 0);
-
-                    if (GroundDetact && (StepTimer > StepInterval))
-                        Step();
-                    else
-                        StepTimer += Time.deltaTime;
-
-                }
+                if (GroundDetact && (StepTimer > StepInterval))
+                    Step();
+                else
+                    StepTimer += Time.deltaTime;
             }
 
         }
 
+        RBody.velocity = new Vector2(Mathf.Lerp(RBody.velocity.x, targetVelocity, Hor_Smooth), RBody.velocity.y);
+
         // ========================= 기타 컨트롤 보정 ===================================
 
 
-        if ( !ControlAllowed || !(Input.GetKey(leftmove) || Input.GetKey(rightmove)))
-        {
-            if(GroundDetact)
-            RBody.velocity = Vector2.Lerp(RBody.velocity, new Vector2(0, RBody.velocity.y), 0.25f);
-        }
+        //if ( !ControlAllowed || !(Input.GetKey(leftmove) || Input.GetKey(rightmove)))
+        //{
+        //    if(GroundDetact)
+        //    RBody.velocity = Vector2.Lerp(RBody.velocity, new Vector2(0, RBody.velocity.y), 0.25f);
+        //}
 
         LimitVerticalSpeed(-Vrt_MaxSpeed, Vrt_MaxSpeed);
 
         if (GroundDetact)
             AirJumped = false;
-
-        #endregion
 
     }
 
@@ -202,7 +192,7 @@ public class PlayerCore : MonoBehaviour {
         }
 
         //애니메이션 관리
-        anim.SetBool(AniPar_MoveKey, ControlAllowed && (Input.GetKey(rightmove) || Input.GetKey(leftmove)));
+        anim.SetBool(AniPar_MoveKey, !ActionOccupied && (Input.GetKey(rightmove) || Input.GetKey(leftmove)));
         anim.SetBool(AniPar_OnGround, GroundDetact);
         anim.SetFloat(AniPar_VrtSpeed, RBody.velocity.y);
 
@@ -242,7 +232,7 @@ public class PlayerCore : MonoBehaviour {
     public void Step()
     {
         StepTimer = 0f;
-        if (Mathf.Abs(RBody.velocity.x) > Hor_MaxSpeed / 1.1)
+        if (Mathf.Abs(RBody.velocity.x) > Hor_Speed / 1.1)
             Instantiate(GroundStep, RCO_Foot.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
     }
 

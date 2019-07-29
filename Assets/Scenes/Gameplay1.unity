@@ -14332,7 +14332,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 0
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
@@ -14969,8 +14969,8 @@ MonoBehaviour:
   attack: 323
   throwP: 324
   dash: 304
-  Hor_Acceleration: 0.5
-  Hor_MaxSpeed: 5
+  Hor_Speed: 5
+  Hor_Smooth: 0.2
   JumpVelocity: 7
   AirJumpVelocity: 10
   JumpDuration: 0.25
@@ -15035,7 +15035,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 124406945}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 16b47c12d8a142240b098cf6f718449b, type: 2}
+  m_Material: {fileID: 6200000, guid: 14da331d925d849448a0fb59d17e05a9, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -54655,20 +54655,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LookaheadTime: 0.4
-  m_LookaheadSmoothing: 10
+  m_LookaheadTime: 0.3
+  m_LookaheadSmoothing: 15
   m_LookaheadIgnoreY: 1
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
-  m_ScreenX: 0.5
+  m_ScreenX: 0.49875
   m_ScreenY: 0.5
   m_CameraDistance: 15
-  m_DeadZoneWidth: 0.06625
+  m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0.202
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.8
+  m_SoftZoneWidth: 0.75
   m_SoftZoneHeight: 0.5
   m_BiasX: 0
   m_BiasY: -0.2
@@ -54711,7 +54711,7 @@ MonoBehaviour:
   m_NoiseProfile: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666, type: 2}
   m_AmplitudeGain: 1
   m_FrequencyGain: 1
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
+  mNoiseOffsets: {x: 981.0956, y: -208.32361, z: 282.61227}
 --- !u!1 &829257253
 GameObject:
   m_ObjectHideFlags: 0
@@ -118654,7 +118654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599952401}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4999994, y: 0.544, z: -15}
+  m_LocalPosition: {x: 0.52426463, y: 0.544, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 637119856}

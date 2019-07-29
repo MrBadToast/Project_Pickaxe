@@ -32,7 +32,7 @@ public class PA_PickaxeThrow : MonoBehaviour
 
     void Update()
     {
-        if (player.ControlAllowed && !player.WallHanged)
+        if (!player.ActionOccupied && !player.WallHanged)
         {
             if (Input.GetKeyDown(player.throwP))
             {
@@ -45,7 +45,7 @@ public class PA_PickaxeThrow : MonoBehaviour
     {
         player.anim.Play(AniState_ThrowReady);
 
-        player.ControlAllowed = false;
+        player.ActionOccupied = true;
         TimeManager.Instance.SetTimeScale(0.2f);
 
         Vector3 Target = Vector3.zero;
@@ -111,7 +111,7 @@ public class PA_PickaxeThrow : MonoBehaviour
         player.anim.SetTrigger(AniPar_PickaxeReturned);
         PickAxe.SetActive(false);
         PickaxeChain.SetActive(false);
-        player.ControlAllowed = true;
+        player.ActionOccupied = false;
     }
 
     public void CancelThrow()
@@ -121,7 +121,7 @@ public class PA_PickaxeThrow : MonoBehaviour
         PickAxe.transform.position = Vector2.zero;
         PickAxe.SetActive(false);
         PickaxeChain.SetActive(false);
-        player.ControlAllowed = true;
+        player.ActionOccupied = false;
         TimeManager.Instance.SetTimeScale(1.0f);        
     }
 }

@@ -1,25 +1,22 @@
 fileFormatVersion: 2
-guid: 91ad7554def238d4684a2bed12e8b20a
+guid: 839c962b8936eda4a8d23443170e4a44
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1259971214665448640
-    second: Player_MidairJump_0
+      213: 2701190959820205320
+    second: Player_AttackB_1_0
   - first:
-      213: 7528313235878591329
-    second: Player_MidairJump_1
+      213: -6867263438243646053
+    second: Player_AttackB_1_1
   - first:
-      213: -4396362225188531346
-    second: Player_MidairJump_2
+      213: 4080392684763228971
+    second: Player_AttackB_1_2
   - first:
-      213: -2433637113920621244
-    second: Player_MidairJump_3
+      213: 5675550755688019948
+    second: Player_AttackB_1_3
   - first:
-      213: 7768264858268316238
-    second: Player_MidairJump_4
-  - first:
-      213: 5039810832671877996
-    second: Player_MidairJump_5
+      213: 822973841849539991
+    second: Player_AttackB_1_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -104,7 +101,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_MidairJump_0
+      name: Player_AttackB_1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +115,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b57d598243c4ab4894d60bb499e2d3d
-      internalID: -1259971214665448640
+      spriteID: 588c1eb0552f86147bc1e0595e2f388e
+      internalID: 2701190959820205320
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_MidairJump_1
+      name: Player_AttackB_1_1
       rect:
         serializedVersion: 2
         x: 32
@@ -139,14 +136,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90fef55f5dd2a7d42942302355a887e7
-      internalID: 7528313235878591329
+      spriteID: bcd399798e70a374496639d9aae5f12f
+      internalID: -6867263438243646053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_MidairJump_2
+      name: Player_AttackB_1_2
       rect:
         serializedVersion: 2
         x: 64
@@ -160,14 +157,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5adfe3136035ea438c1b24d3d864897
-      internalID: -4396362225188531346
+      spriteID: d71acd48a9aca70498d218830017dee9
+      internalID: 4080392684763228971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_MidairJump_3
+      name: Player_AttackB_1_3
       rect:
         serializedVersion: 2
         x: 96
@@ -181,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a5326a1049d8e143bfb65eccd0fccdd
-      internalID: -2433637113920621244
+      spriteID: b33bd78ffa9fdd549b37f34a293a35dd
+      internalID: 5675550755688019948
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_MidairJump_4
+      name: Player_AttackB_1_4
       rect:
         serializedVersion: 2
         x: 128
@@ -202,29 +199,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edb62dec560cea64d8c20acf0644c1cd
-      internalID: 7768264858268316238
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_MidairJump_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a915fe898d1a2e147a6099450b1836f2
-      internalID: 5039810832671877996
+      spriteID: 1c59d7168935c4749b8fc05ad3bfc66a
+      internalID: 822973841849539991
       vertices: []
       indices: 
       edges: []

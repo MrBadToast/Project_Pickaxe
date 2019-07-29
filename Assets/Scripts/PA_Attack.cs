@@ -54,6 +54,7 @@ public class PA_Attack : MonoBehaviour
         AirAttackObj.SetActive(false);
         AttackHitbox.SetActive(false);
     }
+
     void Update()
     {
         if (player.WallHanged)
@@ -79,7 +80,7 @@ public class PA_Attack : MonoBehaviour
             }
         }
 
-        if (player.ControlAllowed)
+        if (!player.ActionOccupied)
         {
             if (AttackTimer > AttackStandbyTime)
             {
@@ -117,7 +118,7 @@ public class PA_Attack : MonoBehaviour
 
     IEnumerator Normal_Attack()
     {
-        player.ControlAllowed = false;
+        player.ActionOccupied = true;
         Vector3 Target = player.GetMouseWorldpos();
 
         if (Target.x > transform.position.x)
@@ -131,14 +132,14 @@ public class PA_Attack : MonoBehaviour
         {
             case 0:
                 AttackedNumber = 1;
-                player.anim.Play(AniState_NormalAttack1);
+                player.anim.Play(AniState_NormalAttack1,-1,0f);
                 AttackHitbox.SetActive(true);
                 Instantiate(AttackEffect, AttackEffectOrigin.position, transform.rotation);
                 break;
 
             case 1:
                 AttackedNumber = 2;
-                player.anim.Play(AniState_NormalAttack2);
+                player.anim.Play(AniState_NormalAttack2,-1,0f);
                 AttackHitbox.SetActive(true);
                 Instantiate(AttackEffect2, AttackEffectOrigin.position, transform.rotation);
                 break;
@@ -146,7 +147,7 @@ public class PA_Attack : MonoBehaviour
             case 2:
 
                 AttackedNumber = 0;
-                player.anim.Play(AniState_NormalAttack3);
+                player.anim.Play(AniState_NormalAttack3,-1,0f);
                 AttackHitbox.SetActive(true);
                 Instantiate(AttackEffect, AttackEffectOrigin.position, transform.rotation);
                 break;
@@ -155,7 +156,7 @@ public class PA_Attack : MonoBehaviour
 
         yield return new WaitForSeconds(AttackTime);
         AttackHitbox.SetActive(false);
-        player.ControlAllowed = true;
+        player.ActionOccupied = false;
         yield return null;
 
     }
@@ -167,9 +168,8 @@ public class PA_Attack : MonoBehaviour
         else
             player.RBody.velocity = new Vector2(player.RBody.velocity.x, 0f);
 
-        AirAttackObj.SetActive(false);
         AirAttackObj.SetActive(true);
-        AirAttackObj.GetComponent<Animator>().Play("AirAttack");
+        AirAttackObj.GetComponent<Animator>().Play("AirAttack",-1,0f);
         AirAttackHitbox.SetActive(true);
         AirAttacked = true;
 
@@ -183,7 +183,7 @@ public class PA_Attack : MonoBehaviour
         StopCoroutine("Normal_Attack");
         StopCoroutine("MidairAttack");
         AttackHitbox.SetActive(false);
-        player.ControlAllowed = true;
+        player.ActionOccupied = false;
     }
 
     private void WallHang()
