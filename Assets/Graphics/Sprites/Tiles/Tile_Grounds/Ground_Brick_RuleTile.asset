@@ -21,6 +21,8 @@ MonoBehaviour:
     m_Sprites:
     - {fileID: 6921999265296062806, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
     - {fileID: -9131717135007210915, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -1041464204213810796, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -6207696424086965864, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
     m_GameObject: {fileID: 0}
     m_AnimationSpeed: 1
     m_PerlinScale: 0.5
@@ -32,6 +34,8 @@ MonoBehaviour:
     m_Sprites:
     - {fileID: 467788767985682013, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
     - {fileID: 8624229338392711760, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -3010725954413515782, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: 6671377750739263149, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
     m_GameObject: {fileID: 0}
     m_AnimationSpeed: 1
     m_PerlinScale: 0.5
@@ -43,6 +47,8 @@ MonoBehaviour:
     m_Sprites:
     - {fileID: -593910771522285920, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
     - {fileID: 3182330214528467443, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -4869929734952438301, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: 5746973651271292561, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
     m_GameObject: {fileID: 0}
     m_AnimationSpeed: 1
     m_PerlinScale: 0.5
@@ -54,6 +60,8 @@ MonoBehaviour:
     m_Sprites:
     - {fileID: 1950672545633589213, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
     - {fileID: -6075936530055132854, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -91028425448832609, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -5859726873836637338, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
     m_GameObject: {fileID: 0}
     m_AnimationSpeed: 1
     m_PerlinScale: 0.5
@@ -65,6 +73,8 @@ MonoBehaviour:
     m_Sprites:
     - {fileID: 7072620802802884205, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
     - {fileID: 3700111943524813774, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -7715860271926213186, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
+    - {fileID: -7142849309652612599, guid: 000ec72ea30a48a4cabe2b844f4a9eca, type: 3}
     m_GameObject: {fileID: 0}
     m_AnimationSpeed: 1
     m_PerlinScale: 0.5

@@ -14,7 +14,7 @@ public class Effect_AfterImage : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a - FadeSpeed);
 

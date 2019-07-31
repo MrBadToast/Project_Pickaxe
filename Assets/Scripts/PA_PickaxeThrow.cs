@@ -63,7 +63,7 @@ public class PA_PickaxeThrow : MonoBehaviour
 
             Debug.DrawLine(transform.position, Target);
 
-            yield return null;
+            yield return new WaitForSeconds(0.02f);
         }
         player.anim.Play(AniState_ThrowPickaxe);
 
@@ -105,7 +105,7 @@ public class PA_PickaxeThrow : MonoBehaviour
 
             Debug.DrawLine(transform.position, Target, Color.red, 1.0f);
 
-            yield return null;
+            yield return new WaitForSeconds(0.02f);
         }
 
         player.anim.SetTrigger(AniPar_PickaxeReturned);

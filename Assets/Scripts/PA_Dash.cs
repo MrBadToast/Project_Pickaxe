@@ -8,10 +8,12 @@ public class PA_Dash : MonoBehaviour
 {
     public float DashSpeed = 5.0f;
     public float DashTime = 0.3f;
+    public float DashCooldown = 0.5f;
     public GameObject AfterImage;
     public GameObject DashEffect;
 
     private bool Dashing = false;
+    private float CoolDownTimer = 0.0f;
 
     PlayerCore player;
 
@@ -24,16 +26,21 @@ public class PA_Dash : MonoBehaviour
     {
         if (player.ControlAllowed)
         {
-            if (Input.GetKeyDown(player.dash) && !Dashing)
+            if (Input.GetKeyDown(player.dash) && !Dashing && CoolDownTimer > DashCooldown)
             {
                 player.CancelAllActions();
                 Instantiate(DashEffect, transform.position, transform.rotation);
                 StartCoroutine(Dash());
             }
-
-            if (Dashing)
-                Instantiate(AfterImage, transform.position, transform.rotation);
         }
+    }
+
+    void FixedUpdate()
+    {
+        if (Dashing)
+            Instantiate(AfterImage, transform.position, transform.rotation);
+        else
+            CoolDownTimer += Time.deltaTime;
     }
 
     IEnumerator Dash()
@@ -60,7 +67,6 @@ public class PA_Dash : MonoBehaviour
         player.RBody.gravityScale = PrevGravity;
         player.ActionOccupied = false;
         Dashing = false;
-
-        yield return null;
+        CoolDownTimer = 0;
     }
 }
