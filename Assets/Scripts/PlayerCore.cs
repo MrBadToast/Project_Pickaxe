@@ -39,6 +39,7 @@ public class PlayerCore : MonoBehaviour {
 
     [Title("기타 속성")]
     public LayerMask TerrainLayer;              // 플레이어가 딛는 땅을 나타내는 레이어를 적용시켜야 합니다.
+    public LayerMask SemiTerrainLayer;
     public float GroundRCDistance;              // 땅과 얼마나 가까이 있을때 땅 위에 딛는 판정을 할지 결정합니다.
     public float ForwardRCDistance;              
     public float StepInterval = 1f;             // 캐릭터가 발을 땅에 딛는 주기입니다.
@@ -116,11 +117,13 @@ public class PlayerCore : MonoBehaviour {
 
         #region 레이캐스트 관리
 
-        GroundDetact = Physics2D.Raycast(RCO_Foot.position, Vector2.down, GroundRCDistance, TerrainLayer);
+        GroundDetact = (Physics2D.Raycast(RCO_Foot.position, Vector2.down, GroundRCDistance, TerrainLayer) ||
+                       Physics2D.Raycast(RCO_Foot.position, Vector2.down, GroundRCDistance, SemiTerrainLayer)) &&
+                       Mathf.Round(RBody.velocity.y * 1000f) / 1000f <= 0f;
         Debug.DrawLine(RCO_Foot.position, RCO_Foot.position + new Vector3(0, -GroundRCDistance, 0), Color.magenta);
 
         ForwardDetact = Physics2D.Raycast(RCO_Forward.position, headingTo, ForwardRCDistance, TerrainLayer);
-        Debug.DrawLine(RCO_Forward.position, RCO_Forward.position + new Vector3(ForwardRCDistance,0, 0), Color.cyan);
+        Debug.DrawLine(RCO_Forward.position, RCO_Forward.position + new Vector3(ForwardRCDistance, 0, 0), Color.cyan);
 
         if (!GroundDetact)
             AirTimer += Time.deltaTime;
@@ -165,12 +168,6 @@ public class PlayerCore : MonoBehaviour {
 
         // ========================= 기타 컨트롤 보정 ===================================
 
-
-        //if ( !ControlAllowed || !(Input.GetKey(leftmove) || Input.GetKey(rightmove)))
-        //{
-        //    if(GroundDetact)
-        //    RBody.velocity = Vector2.Lerp(RBody.velocity, new Vector2(0, RBody.velocity.y), 0.25f);
-        //}
 
         LimitVerticalSpeed(-Vrt_MaxSpeed, Vrt_MaxSpeed);
 

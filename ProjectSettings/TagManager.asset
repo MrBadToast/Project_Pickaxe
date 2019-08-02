@@ -23,7 +23,7 @@ TagManager:
   - PlayerHurt
   - Background
   - CameraCollider
-  - 
+  - SemiStepable
   - 
   - 
   - 

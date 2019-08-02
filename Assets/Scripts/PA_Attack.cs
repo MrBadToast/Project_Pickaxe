@@ -172,8 +172,7 @@ public class PA_Attack : MonoBehaviour
         AirAttackObj.GetComponent<Animator>().Play("AirAttack",-1,0f);
         AirAttackHitbox.SetActive(true);
         AirAttacked = true;
-
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         AirAttackObj.SetActive(false);
         AirAttackHitbox.SetActive(false);
     }
@@ -183,6 +182,8 @@ public class PA_Attack : MonoBehaviour
         StopCoroutine("Normal_Attack");
         StopCoroutine("MidairAttack");
         AttackHitbox.SetActive(false);
+        AirAttackObj.SetActive(false);
+        AirAttackHitbox.SetActive(false);
         player.ActionOccupied = false;
     }
 
