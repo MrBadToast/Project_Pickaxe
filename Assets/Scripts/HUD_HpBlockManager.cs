@@ -74,7 +74,6 @@ public class HUD_HpBlockManager : MonoBehaviour
         {
             if (i >= Blocks.Count)
             {
-                Debug.Log(Blocks.Count);
                 GameObject temp = Instantiate(HealthBlockPrefab, transform);
                 temp.transform.position += new Vector3(Blocks.Count * BlockSpace, 0.0f);
                 Blocks.Add(temp.GetComponent<HUD_HpBlockSingle>());

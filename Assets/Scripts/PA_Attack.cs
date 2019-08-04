@@ -126,7 +126,7 @@ public class PA_Attack : MonoBehaviour
         else
         { transform.rotation = Quaternion.Euler(0, 180, 0); player.headingTo = Vector2.left; }
 
-        player.RBody.velocity = player.headingTo * 5;
+        //player.RBody.velocity = player.headingTo * 5;
 
         switch (AttackedNumber)
         {

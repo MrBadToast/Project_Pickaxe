@@ -51,6 +51,13 @@ public class PlayerCore : MonoBehaviour {
     public Transform RCO_Foot;
     public Transform RCO_Forward;
 
+    [FoldoutGroup("애니메이션 스테이트")]
+    public string AniState_MidairJump;
+    [FoldoutGroup("애니메이션 스테이트")]
+    public string AniState_Hurt;
+    [FoldoutGroup("애니메이션 스테이트")]
+    public string AniState_Dead;
+
     [FoldoutGroup("애니메이션 파라미터")]
     public string AniPar_MoveKey;
     [FoldoutGroup("애니메이션 파라미터")]
@@ -135,6 +142,8 @@ public class PlayerCore : MonoBehaviour {
 
         float targetVelocity = 0;
 
+        if (!GroundDetact || !ControlAllowed)
+            targetVelocity = RBody.velocity.x;
 
         if (!WallHanged && !ActionOccupied && ControlAllowed)
         {
@@ -188,8 +197,13 @@ public class PlayerCore : MonoBehaviour {
             AirJump();
         }
 
-        //애니메이션 관리
-        anim.SetBool(AniPar_MoveKey, !ActionOccupied && (Input.GetKey(rightmove) || Input.GetKey(leftmove)));
+        if (ControlAllowed)
+        {
+            anim.SetBool(AniPar_MoveKey, !ActionOccupied && (Input.GetKey(rightmove) || Input.GetKey(leftmove)));
+        }
+        else
+            anim.SetBool(AniPar_MoveKey, false);
+
         anim.SetBool(AniPar_OnGround, GroundDetact);
         anim.SetFloat(AniPar_VrtSpeed, RBody.velocity.y);
 
@@ -222,6 +236,7 @@ public class PlayerCore : MonoBehaviour {
 
     public void AirJump()
     {
+        anim.Play(AniState_MidairJump);
         RBody.velocity = new Vector2(RBody.velocity.x, AirJumpVelocity);
         AirJumped = true;
     }
@@ -246,9 +261,9 @@ public class PlayerCore : MonoBehaviour {
 
     public void Dead()
     {
+        anim.Play(AniState_Dead);
         TimeManager.Instance.SetTimeScale(0.2f);
         RBody.velocity = new Vector2(-headingTo.x, 1f).normalized * DamagedForce * 2;
-        GameObject.FindGameObjectWithTag("vcam").GetComponent<CinemachineFramingTransposer>().m_CameraDistance = 5f;
     }
 
     //========================================================================================
@@ -284,7 +299,7 @@ public class PlayerCore : MonoBehaviour {
             RBody.velocity = Vector2.zero;
             RBody.velocity = new Vector2(-headingTo.x, 1f).normalized * DamagedForce;
             HurtTimer = 0;
-            ControlAllowed = false;
+            anim.Play(AniState_Hurt);
 
             if (CurrentHealth <= 0)
             {
@@ -293,7 +308,6 @@ public class PlayerCore : MonoBehaviour {
             }
 
             yield return new WaitForSeconds(HurtDuration);
-            ControlAllowed = true;      
         }
     }
 }

@@ -11,6 +11,9 @@ public class PA_Dash : MonoBehaviour
     public float DashCooldown = 0.5f;
     public GameObject AfterImage;
     public GameObject DashEffect;
+    [Space]
+    public string Anistate_Dash;
+
 
     private bool Dashing = false;
     private float CoolDownTimer = 0.0f;
@@ -45,6 +48,8 @@ public class PA_Dash : MonoBehaviour
 
     IEnumerator Dash()
     {
+        GetComponent<Animator>().Play(Anistate_Dash);
+
         if (Input.GetKey(player.rightmove))
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
