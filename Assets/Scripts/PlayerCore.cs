@@ -97,6 +97,8 @@ public class PlayerCore : MonoBehaviour {
     public bool ForwardDetact;
     [HideInInspector]
     public bool AirJumped = false;
+    [HideInInspector]
+    public bool Invincible = false;
 
     private float AirTimer = 0f;                     // 캐릭터가 공중에 있을때 증가하는 값입니다.
     private float StepTimer = 0f;                    // 캐릭터가 걸을때 시간측정을 위한 값입니다.
@@ -142,7 +144,7 @@ public class PlayerCore : MonoBehaviour {
 
         float targetVelocity = 0;
 
-        if (!GroundDetact || !ControlAllowed)
+        if (!GroundDetact || !ControlAllowed || RBody.gravityScale <= 0.5f)
             targetVelocity = RBody.velocity.x;
 
         if (!WallHanged && !ActionOccupied && ControlAllowed)
@@ -291,13 +293,13 @@ public class PlayerCore : MonoBehaviour {
     //=========================================================================================
     private IEnumerator Cor_Hurt(int Damage, Vector3 hurtOrigin)
     {
-        if (HurtTimer >= HurtCooldown)
+        if (HurtTimer >= HurtCooldown && !Invincible)
         {
             CurrentHealth -= Damage;
 
             HUD.Instance.OnHurt(CurrentHealth);
             RBody.velocity = Vector2.zero;
-            RBody.velocity = new Vector2(-headingTo.x, 1f).normalized * DamagedForce;
+            RBody.velocity = ((transform.position-hurtOrigin).normalized + Vector3.up)* DamagedForce;
             HurtTimer = 0;
             anim.Play(AniState_Hurt);
 
@@ -307,7 +309,9 @@ public class PlayerCore : MonoBehaviour {
                 yield break;
             }
 
+            ControlAllowed = false;
             yield return new WaitForSeconds(HurtDuration);
+            ControlAllowed = true;
         }
     }
 }

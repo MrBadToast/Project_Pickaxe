@@ -7,6 +7,7 @@ public class AttackHitbox : MonoBehaviour
     public float NormalDamage = 1.0f;
     public Vector2 KnockBackPower;
     public LayerMask Target;
+    public GameObject SlashEffect;
 
     Vector2 headingTo;
     void Awake()
@@ -32,7 +33,12 @@ public class AttackHitbox : MonoBehaviour
 
         foreach (Collider2D col in cols)
         {
-            col.GetComponent<Enemy>().Hurt(NormalDamage, new Vector2(headingTo.x * KnockBackPower.x, KnockBackPower.y));
+            Vector2 force = new Vector2(headingTo.x * KnockBackPower.x, KnockBackPower.y);
+
+            col.GetComponent<Enemy>().Hurt(NormalDamage, force);
+            TimeManager.Instance.SetTimeScaleTimered(0.2f, 0.1f);
+            if (SlashEffect)
+                Instantiate(SlashEffect, col.transform.position,Quaternion.Euler(0,0,Random.Range(0f,359f)));
         }
     }
 }

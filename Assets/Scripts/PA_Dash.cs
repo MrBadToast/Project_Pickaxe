@@ -67,11 +67,13 @@ public class PA_Dash : MonoBehaviour
         player.RBody.gravityScale = 0f;
         Dashing = true;
         player.ActionOccupied = true;
+        player.Invincible = true;
 
         yield return new WaitForSeconds(DashTime);
         player.RBody.gravityScale = PrevGravity;
         player.ActionOccupied = false;
         Dashing = false;
+        player.Invincible = false;
         CoolDownTimer = 0;
     }
 }

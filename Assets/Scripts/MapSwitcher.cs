@@ -27,6 +27,7 @@ public class MapSwitcher : MonoBehaviour
         if (Map1.MapObject.activeInHierarchy)
         {
             Map2.MapObject.SetActive(true);
+
             MainVirtualCamera.Instance.SetConfinerColider(Map2.camColider);
             if (keepY == true)
                 collision.transform.position = new Vector2(Map2_EnterPos.position.x, collision.transform.position.y);
